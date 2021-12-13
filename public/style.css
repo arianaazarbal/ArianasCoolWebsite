@@ -1,0 +1,94 @@
+h2
+{
+  background-color: pink;
+  font-family: cursive;
+}
+
+body
+{
+  background-color: blue;
+  background-image: url(doggo.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#first
+{
+  width: 300px;
+  border: 15px;
+  padding: 50px;
+  margin: 20px;
+  border-radius: 25px;
+  background-color: powderblue;
+}
+
+button
+{
+  width: 100px;
+  border: 5px;
+  border-radius: 15px;
+
+}
+
+#second
+{
+  width: 300px;
+  border: 15px white;
+  padding: 50px;
+  margin: 20px;
+  background-color: powderblue;
+  border-radius: 25px;
+
+}
+
+#third
+{
+  width: 300px;
+  border: 15px white;
+  padding: 50px;
+  margin: 20px;
+  background-color: powderblue;
+  border-radius: 25px;
+
+}
+
+.simon
+{
+  margin: 20;
+  background-color: white;
+  min-width: 100px;
+  min-height: 50px;
+}
+
+#GreenButton
+{
+  width = 50px;
+  background-color: green;
+  text-decoration-color: white;
+}
+#YellowButton
+{
+  width = 50px;
+  background-color: yellow;
+  text-decoration-color: white;
+}
+#RedButton
+{
+  width = 50px;
+  background-color: red;
+  text-decoration-color: white;
+}
+#BlueButton
+{
+  width = 50px;
+  background-color: blue;
+  text-decoration-color: white;
+}
+
+.lit
+{
+  background-color: rgb (0,255,0);
+}
+
+
+)
