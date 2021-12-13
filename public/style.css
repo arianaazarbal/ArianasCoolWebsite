@@ -62,27 +62,31 @@ button
 
 #GreenButton
 {
-  width = 50px;
+  width = 70px;
   background-color: green;
   text-decoration-color: white;
+  height: = 50px;
 }
 #YellowButton
 {
-  width = 50px;
+  width = 70px;
   background-color: yellow;
   text-decoration-color: white;
+  height = 50px;
 }
 #RedButton
 {
-  width = 50px;
+  width = 70px;
   background-color: red;
   text-decoration-color: white;
+  height = 50px;
 }
 #BlueButton
 {
-  width = 50px;
+  width = 70px;
   background-color: blue;
   text-decoration-color: white;
+  height = 50px;
 }
 
 .lit

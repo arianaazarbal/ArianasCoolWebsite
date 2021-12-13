@@ -41,14 +41,18 @@
 
   <script>
   var counter = 1;
-  Boolean g = false;
+  var g = "false";
+  var y = "false";
+  var r = "false";
+  var b = "false";
+
+  var arr = [];
   for (var i = 0; i<counter; i++)
   {
     var rand = Math.random() * (3) + 1;
-    if (rand ==1)
-    {
+    arr.push(rand);
 
-    }
+    counter++;
   }
   function func()
   {
