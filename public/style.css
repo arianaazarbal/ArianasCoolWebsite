@@ -60,7 +60,7 @@ button
   min-height: 50px;
 }
 
-#GreenButton
+.green
 {
   width = 70px;
   background-color: green;
@@ -89,7 +89,7 @@ button
   height = 50px;
 }
 
-.lit
+.litGreen
 {
   background-color: rgb (0,255,0);
 }
