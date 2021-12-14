@@ -40,29 +40,46 @@
   </body>
 
   <script>
-  var counter = 1;
-  var g = "false";
-  var y = "false";
-  var r = "false";
-  var b = "false";
 
-  var arr = [];
-  for (var i = 0; i<counter; i++)
-  {
-    var rand = Math.random() * (3) + 1;
-    arr.push(rand);
-
-    counter++;
-  }
-  function func()
+  function funcGreen()
   {
     greenButtonPageElement.classList.remove('green');
     greenButtonPageElement.classList.add('litGreen');
     console.log ('new click');
   }
+  function funcYellow()
+  {
+    yellowButtonPageElement.classList.remove('yellow');
+    yellowButtonPageElement.classList.add('litYellow');
+    console.log ('new click');
+  }
+  function funcRed()
+  {
+    redButtonPageElement.classList.remove('red');
+    redButtonPageElement.classList.add('litRed');
+    console.log ('new click');
+  }
+  function funcBlue()
+  {
+    blueButtonPageElement.classList.remove('blue');
+    blueButtonPageElement.classList.add('litBlue');
+    console.log ('new click');
+  }
 
   var greenButtonPageElement = document.getElementById("GreenButton");
-  greenButtonPageElement.addEventListener ("click", func);
+  greenButtonPageElement.addEventListener ("click", funcGreen);
+
+  var yellowButtonPageElement = document.getElementById("YellowButton");
+  yellowButtonPageElement.addEventListener ("click", funcYellow);
+
+  var redButtonPageElement = document.getElementById("RedButton");
+  redButtonPageElement.addEventListener ("click", funcRed);
+
+  var blueButtonPageElement = document.getElementById("BlueButton");
+  blueButtonPageElement.addEventListener ("click", funcBlue);
+
+
+
 
 
 
