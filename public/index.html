@@ -24,22 +24,135 @@
 
 
     <div class = "simon">
-        <button class = "green" id = "GreenButton">
+      <div class = "display" id= "display">
+        Welcome! Click the start button to begin!
+      </div>
+      <button class = "start" id = "start">
+        Start
+      </button>
+      <button class = "green" id = "GreenButton">
           Green
-        </button>
-        <button class = "yellow" id = "YellowButton">
-          Yellow
-        </button>
-        <button class = "red" id = "RedButton">
-          Red
-        </button>
-        <button class = "blue" id = "BlueButton">
-          Blue
-        </button>
+      </button>
+      <button class = "yellow" id = "YellowButton">
+        Yellow
+      </button>
+      <button class = "red" id = "RedButton">
+        Red
+      </button>
+      <button class = "blue" id = "BlueButton">
+        Blue
+      </button>
+
     </div>
   </body>
 
   <script>
+
+  var greenButtonPageElement = document.getElementById("GreenButton");
+  var yellowButtonPageElement = document.getElementById("YellowButton");
+  var redButtonPageElement = document.getElementById("RedButton");
+  var blueButtonPageElement = document.getElementById("BlueButton");
+
+  var startButtonPageElement = document.getElementById("start");
+  startButtonPageElement.addEventListener ("click", playGame);
+  var counter = 1;
+  var currSolutions= [];
+  function playGame()
+  {
+    var displayPageElement = document.getElementById("display");
+    displayPageElement.innerHTML = ("Buttons will now flash...get ready");
+    for (var i = 0; i<counter; i++)
+    {
+      flashRandom();
+    }
+    displayPageElement.innerHTML = ("Press the " + counter + " buttons in the correct order!");
+    greenButtonPageElement.addEventListener ("click", userClick("Green"));
+
+    yellowButtonPageElement.addEventListener ("click", userClick("Yellow"));
+
+    redButtonPageElement.addEventListener ("click", userClick("Red"));
+
+    blueButtonPageElement.addEventListener ("click", userClick("Blue"));
+  }
+  function flashRandom ()
+  {
+    min = Math.ceil(1);
+    max = Math.floor(5);
+    var ran= Math.floor(Math.random() * (max - min) + min);
+
+    if (ran == 1)
+    {
+      currSolutions.splice(0,0,"Green");
+      changeGreen();
+      setTimeout(()=> {changeGreen()}, 2000);
+
+    }
+    else if (ran ==2)
+    {
+      currSolutions.splice(0,0,"Yellow");
+      changeYellow();
+      setTimeout(()=> {changeYellow()}, 2000);
+
+    }
+    else if (ran == 3)
+    {
+      currSolutions.splice(0,0,"Red");
+      changeRed();
+      setTimeout(()=> {changeRed()}, 2000);
+
+    }
+    else
+    {
+      currSolutions.splice(0,0,"Blue");
+      changeBlue();
+      setTimeout(()=> {changeBlue()}, 2000);
+
+    }
+  }
+
+  function userClick(color)
+  {
+    if (currSolutions.pop()== color)
+    {
+      displayPageElement.innerHTML = ("Press the " + counter + " buttons in the correct order!");
+      if (color == "Green")
+      {
+        setTimeout(()=> {changeGreen()}, 1000);
+      }
+      else if (color == "Yellow")
+      {
+        setTimeout(()=> {changeYellow()}, 1000);
+      }
+      else if (color == "Red")
+      {
+        setTimeout(()=> {changeRed()}, 1000);
+      }
+      else
+      {
+        setTimeout(()=> {changeBlue()}, 1000);
+      }
+    }
+    else {
+      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
+      if (color == "Green")
+      {
+        changeGreen();
+      }
+      else if (color == "Yellow")
+      {
+        changeYellow();
+      }
+      else if (color == "Red")
+      {
+        changeRed();
+      }
+      else
+      {
+        changeBlue();
+      }
+    }
+
+  }
 
   function changeGreen()
   {
@@ -98,17 +211,7 @@
     console.log ('new blue color change');
   }
 
-  var greenButtonPageElement = document.getElementById("GreenButton");
-  greenButtonPageElement.addEventListener ("click", changeGreen);
 
-  var yellowButtonPageElement = document.getElementById("YellowButton");
-  yellowButtonPageElement.addEventListener ("click", changeYellow);
-
-  var redButtonPageElement = document.getElementById("RedButton");
-  redButtonPageElement.addEventListener ("click", changeRed);
-
-  var blueButtonPageElement = document.getElementById("BlueButton");
-  blueButtonPageElement.addEventListener ("click", changeBlue);
 
 
 
