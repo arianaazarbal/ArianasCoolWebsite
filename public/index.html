@@ -41,42 +41,74 @@
 
   <script>
 
-  function funcGreen()
+  function changeGreen()
   {
-    greenButtonPageElement.classList.remove('green');
-    greenButtonPageElement.classList.add('litGreen');
-    console.log ('new click');
+    if (greenButtonPageElement.classList.contains('green'))
+    {
+      greenButtonPageElement.classList.remove('green');
+      greenButtonPageElement.classList.add('litGreen');
+    }
+    else
+    {
+      greenButtonPageElement.classList.remove('litGreen');
+      greenButtonPageElement.classList.add('green');
+    }
+    console.log ('new green color change');
   }
-  function funcYellow()
+  function changeYellow()
   {
-    yellowButtonPageElement.classList.remove('yellow');
-    yellowButtonPageElement.classList.add('litYellow');
-    console.log ('new click');
+    if (yellowButtonPageElement.classList.contains('yellow'))
+    {
+      yellowButtonPageElement.classList.remove('yellow');
+      yellowButtonPageElement.classList.add('litYellow');
+    }
+    else
+    {
+      yellowButtonPageElement.classList.remove('litYellow');
+      yellowButtonPageElement.classList.add('yellow');
+    }
+    console.log ('new yellow color change');
   }
-  function funcRed()
+  function changeRed()
   {
-    redButtonPageElement.classList.remove('red');
-    redButtonPageElement.classList.add('litRed');
-    console.log ('new click');
+    if (redButtonPageElement.classList.contains('red'))
+    {
+      redButtonPageElement.classList.remove('red');
+      redButtonPageElement.classList.add('litRed');
+    }
+    else
+    {
+      redButtonPageElement.classList.remove('litRed');
+      redButtonPageElement.classList.add('red');
+    }
+    console.log ('new red color change');
   }
-  function funcBlue()
+  function changeBlue()
   {
-    blueButtonPageElement.classList.remove('blue');
-    blueButtonPageElement.classList.add('litBlue');
-    console.log ('new click');
+    if (blueButtonPageElement.classList.contains('blue'))
+    {
+      blueButtonPageElement.classList.remove('blue');
+      blueButtonPageElement.classList.add('litBlue');
+    }
+    else
+    {
+      blueButtonPageElement.classList.remove('litBlue');
+      blueButtonPageElement.classList.add('blue');
+    }
+    console.log ('new blue color change');
   }
 
   var greenButtonPageElement = document.getElementById("GreenButton");
-  greenButtonPageElement.addEventListener ("click", funcGreen);
+  greenButtonPageElement.addEventListener ("click", changeGreen);
 
   var yellowButtonPageElement = document.getElementById("YellowButton");
-  yellowButtonPageElement.addEventListener ("click", funcYellow);
+  yellowButtonPageElement.addEventListener ("click", changeYellow);
 
   var redButtonPageElement = document.getElementById("RedButton");
-  redButtonPageElement.addEventListener ("click", funcRed);
+  redButtonPageElement.addEventListener ("click", changeRed);
 
   var blueButtonPageElement = document.getElementById("BlueButton");
-  blueButtonPageElement.addEventListener ("click", funcBlue);
+  blueButtonPageElement.addEventListener ("click", changeBlue);
 
 
 
