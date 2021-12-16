@@ -55,24 +55,26 @@
 
   var startButtonPageElement = document.getElementById("start");
   startButtonPageElement.addEventListener ("click", playGame);
+  var displayPageElement = document.getElementById("display");
+
   var counter = 1;
+  var correct = false;
   var currSolutions= [];
   function playGame()
   {
-    var displayPageElement = document.getElementById("display");
     displayPageElement.innerHTML = ("Buttons will now flash...get ready");
     for (var i = 0; i<counter; i++)
     {
       flashRandom();
     }
     displayPageElement.innerHTML = ("Press the " + counter + " buttons in the correct order!");
-    greenButtonPageElement.addEventListener ("click", userClick("Green"));
+    greenButtonPageElement.addEventListener ("click", userClickGreen);
 
-    yellowButtonPageElement.addEventListener ("click", userClick("Yellow"));
+    yellowButtonPageElement.addEventListener ("click", userClickYellow);
 
-    redButtonPageElement.addEventListener ("click", userClick("Red"));
+    redButtonPageElement.addEventListener ("click", userClickRed);
 
-    blueButtonPageElement.addEventListener ("click", userClick("Blue"));
+    blueButtonPageElement.addEventListener ("click", userClickBlue);
   }
   function flashRandom ()
   {
@@ -110,49 +112,54 @@
     }
   }
 
-  function userClick(color)
+  function userClickGreen()
   {
-    if (currSolutions.pop()== color)
+    setTimeout(()=> {changeGreen()}, 1000);
+    if (currSolutions.pop()== "Green")
     {
-      displayPageElement.innerHTML = ("Press the " + counter + " buttons in the correct order!");
-      if (color == "Green")
-      {
-        setTimeout(()=> {changeGreen()}, 1000);
-      }
-      else if (color == "Yellow")
-      {
-        setTimeout(()=> {changeYellow()}, 1000);
-      }
-      else if (color == "Red")
-      {
-        setTimeout(()=> {changeRed()}, 1000);
-      }
-      else
-      {
-        setTimeout(()=> {changeBlue()}, 1000);
-      }
+
     }
     else {
       displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
-      if (color == "Green")
-      {
-        changeGreen();
-      }
-      else if (color == "Yellow")
-      {
-        changeYellow();
-      }
-      else if (color == "Red")
-      {
-        changeRed();
-      }
-      else
-      {
-        changeBlue();
-      }
     }
-
   }
+  function userClickYellow()
+  {
+    setTimeout(()=> {changeYellow()}, 1000);
+    if (currSolutions.pop()== "Yellow")
+    {
+
+    }
+    else {
+      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
+
+    }
+  }
+  function userClickRed()
+  {
+    setTimeout(()=> {changeRed()}, 1000);
+    if (currSolutions.pop()== "Red")
+    {
+
+    }
+    else {
+      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
+
+    }
+  }
+  function userClickBlue()
+  {
+    setTimeout(()=> {changeBlue()}, 1000);
+    if (currSolutions.pop()== "Blue")
+    {
+
+    }
+    else {
+      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
+
+    }
+  }
+
 
   function changeGreen()
   {
