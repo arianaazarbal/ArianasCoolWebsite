@@ -30,16 +30,16 @@
       <button class = "start" id = "start">
         Start
       </button>
-      <button class = "green" id = "GreenButton">
+      <button class = "green unclickable" id = "GreenButton">
           Green
       </button>
-      <button class = "yellow" id = "YellowButton">
+      <button class = "yellow unclickable" id = "YellowButton">
         Yellow
       </button>
-      <button class = "red" id = "RedButton">
+      <button class = "red unclickable" id = "RedButton">
         Red
       </button>
-      <button class = "blue" id = "BlueButton">
+      <button class = "blue unclickable" id = "BlueButton">
         Blue
       </button>
 
@@ -54,29 +54,63 @@
   var blueButtonPageElement = document.getElementById("BlueButton");
 
   var startButtonPageElement = document.getElementById("start");
-  startButtonPageElement.addEventListener ("click", playGame);
+  startButtonPageElement.addEventListener ("click", startGame);
   var displayPageElement = document.getElementById("display");
 
   var counter = 1;
-  var correct = false;
-  var currSolutions= [];
-  function playGame()
+  var solutions= [];
+  var answer= [];
+
+  function startGame()
   {
+    startButtonPageElement.classList.add('hidden');
     displayPageElement.innerHTML = ("Buttons will now flash...get ready");
-    for (var i = 0; i<counter; i++)
-    {
-      flashRandom();
-    }
-    displayPageElement.innerHTML = ("Press the " + counter + " buttons in the correct order!");
-    greenButtonPageElement.addEventListener ("click", userClickGreen);
+    initiateRound();
 
-    yellowButtonPageElement.addEventListener ("click", userClickYellow);
-
-    redButtonPageElement.addEventListener ("click", userClickRed);
-
-    blueButtonPageElement.addEventListener ("click", userClickBlue);
   }
-  function flashRandom ()
+
+  function initiateRound()
+  {
+    counter += 1;
+
+    greenButtonPageElement.classList.add('unclickable');
+    yellowButtonPageElement.classList.add('unclickable');
+    redButtonPageElement.classList.add('unclickable');
+    blueButtonPageElement.classList.add('unclickable');
+
+    solutions.push (randomTile);
+
+    lightUp(solutions);
+
+  }
+  function lightUp (sequence)
+  {
+    sequence.forEach((color, index) => {
+    setTimeout(() => {
+
+      if (color == 'green')
+      {
+        changeGreen();
+
+      }
+      else if (color == 'yellow')
+      {
+        changeYellow();
+
+      }
+      else if (color == 'red')
+      {
+        changeRed();
+
+      }
+      else
+      {
+        changeBlue();
+      }
+    }, (index + 1) * 600);
+  });
+  }
+  function randomTile ()
   {
     min = Math.ceil(1);
     max = Math.floor(5);
@@ -84,79 +118,22 @@
 
     if (ran == 1)
     {
-      currSolutions.splice(0,0,"Green");
-      changeGreen();
-      setTimeout(()=> {changeGreen()}, 2000);
+      return ('green');
 
     }
     else if (ran ==2)
     {
-      currSolutions.splice(0,0,"Yellow");
-      changeYellow();
-      setTimeout(()=> {changeYellow()}, 2000);
+      return ('yellow');
 
     }
     else if (ran == 3)
     {
-      currSolutions.splice(0,0,"Red");
-      changeRed();
-      setTimeout(()=> {changeRed()}, 2000);
+      return ('red');
 
     }
     else
     {
-      currSolutions.splice(0,0,"Blue");
-      changeBlue();
-      setTimeout(()=> {changeBlue()}, 2000);
-
-    }
-  }
-
-  function userClickGreen()
-  {
-    setTimeout(()=> {changeGreen()}, 1000);
-    if (currSolutions.pop()== "Green")
-    {
-
-    }
-    else {
-      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
-    }
-  }
-  function userClickYellow()
-  {
-    setTimeout(()=> {changeYellow()}, 1000);
-    if (currSolutions.pop()== "Yellow")
-    {
-
-    }
-    else {
-      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
-
-    }
-  }
-  function userClickRed()
-  {
-    setTimeout(()=> {changeRed()}, 1000);
-    if (currSolutions.pop()== "Red")
-    {
-
-    }
-    else {
-      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
-
-    }
-  }
-  function userClickBlue()
-  {
-    setTimeout(()=> {changeBlue()}, 1000);
-    if (currSolutions.pop()== "Blue")
-    {
-
-    }
-    else {
-      displayPageElement.innerHTML = ("Wrong! You lose. Press Start to begin again.");
-
+      return ('blue');
     }
   }
 
@@ -167,6 +144,8 @@
     {
       greenButtonPageElement.classList.remove('green');
       greenButtonPageElement.classList.add('litGreen');
+      greenButtonPageElement.classList.add('on');
+      greenButtonPageElement.classList.remove('on');
     }
     else
     {
@@ -181,11 +160,15 @@
     {
       yellowButtonPageElement.classList.remove('yellow');
       yellowButtonPageElement.classList.add('litYellow');
+      yellowButtonPageElement.classList.add('on');
+
+
     }
     else
     {
       yellowButtonPageElement.classList.remove('litYellow');
       yellowButtonPageElement.classList.add('yellow');
+      yellowButtonPageElement.classList.remove('on');
     }
     console.log ('new yellow color change');
   }
@@ -195,11 +178,15 @@
     {
       redButtonPageElement.classList.remove('red');
       redButtonPageElement.classList.add('litRed');
+      redButtonPageElement.classList.add('on');
+
     }
     else
     {
       redButtonPageElement.classList.remove('litRed');
       redButtonPageElement.classList.add('red');
+      redButtonPageElement.classList.remove('on');
+
     }
     console.log ('new red color change');
   }
@@ -209,11 +196,15 @@
     {
       blueButtonPageElement.classList.remove('blue');
       blueButtonPageElement.classList.add('litBlue');
+      blueButtonPageElement.classList.add('on');
+
     }
     else
     {
       blueButtonPageElement.classList.remove('litBlue');
       blueButtonPageElement.classList.add('blue');
+      blueButtonPageElement.classList.remove('on');
+
     }
     console.log ('new blue color change');
   }
