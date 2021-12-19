@@ -69,7 +69,7 @@ button
 }
 .yellow{
   width = 70px;
-  background-color: #FFF24D;
+  background-color: #D1D54E;
   text-decoration-color: white;
   height = 50px;
 }
@@ -92,7 +92,7 @@ button
 }
 .litYellow
 {
-  background-color: #FFFF00;
+  background-color: #F7FF00;
 }
 .litRed
 {
@@ -100,7 +100,7 @@ button
 }
 .litBlue
 {
-  background-color: #0909FF;
+  background-color: #0096FF;
 }
 
 .unclickable
