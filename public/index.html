@@ -7,29 +7,29 @@
   </head>
 
   <body>
-    <h2> <center> Hello. </center> </h2>
+    <h2> <center> Welcome to Ariana's Web Page </center> </h2>
 
     <div id = "first">
       We're playing Simon!
-      <button type= "button">
+      <button class = "luck" id = "lucky" type= "button">
           Click for good luck :)
       </button>
     </div>
-    <div id = "second">
-      Here's another box.
-    </div>
-    <div id = "third">
-      Here's a third box.
-    </div>
 
-
+    <br>
+    <br>
+    <br>
     <div class = "simon">
-      <div class = "display" id= "display">
+      <br>
+      <br>
+      <div class = "display" id= "display"> <center>
         Welcome! Click the start button to begin!
-      </div>
+      </center></div>
       <button class = "start" id = "start">
         Start
       </button>
+
+      <br>
       <button class = "green unclickable" id = "GreenButton">
           Green
       </button>
@@ -47,7 +47,14 @@
   </body>
 
   <script>
+  let firstBox = document.getElementById ("first");
+  let luck = document.getElementById("lucky")
+  luck.addEventListener ('click', loser)
 
+  function loser()
+  {
+    firstBox.innerHTML = "Ha. As if clicking some stupid button would give you any luck. You just made a fool of yourself."
+  }
   let greenButtonPageElement = document.getElementById("GreenButton");
   let yellowButtonPageElement = document.getElementById("YellowButton");
   let redButtonPageElement = document.getElementById("RedButton");
@@ -190,8 +197,10 @@
         answer.push(1);
         if (1 !== solutions[answer.length - 1])
         {
-          correct = false;
-          resetGame();
+          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+          setTimeout(() => {
+              resetGame();
+          }, 1500);
         }
         else
         {
@@ -226,7 +235,7 @@
           displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
           setTimeout(() => {
               resetGame();
-          }, 300);
+          }, 1500);
         }
         else
         {
@@ -257,8 +266,10 @@
         answer.push(3);
         if (3 !== solutions[answer.length - 1])
         {
-          correct = false;
-          resetGame();
+          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+          setTimeout(() => {
+              resetGame();
+          }, 1500);
         }
         else
         {
@@ -290,8 +301,10 @@
         answer.push(4);
         if (4 !== solutions[answer.length - 1])
         {
-          correct = false;
-          resetGame();
+          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+          setTimeout(() => {
+              resetGame();
+          }, 1500);
         }
         else
         {
