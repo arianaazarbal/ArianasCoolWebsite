@@ -9,27 +9,30 @@
   <body>
     <h2> <center> Welcome to Ariana's Web Page </center> </h2>
 
-    <div id = "first">
+    <div align = "left" id = "first">
       We're playing Simon!
       <button class = "luck" id = "lucky" type= "button">
           Click for good luck :)
       </button>
-    </div>
+     </div>
 
-    <br>
     <br>
     <br>
     <div class = "simon">
       <br>
       <br>
-      <div class = "display" id= "display"> <center>
-        Welcome! Click the start button to begin!
-      </center></div>
+      <center>
+      <div class = "display" id= "display">
+        Welcome! Click the start button to begin!     
+      </div>
       <button class = "start" id = "start">
         Start
       </button>
+      </center>
+
 
       <br>
+      <center>
       <button class = "green unclickable" id = "GreenButton">
           Green
       </button>
@@ -42,7 +45,7 @@
       <button class = "blue unclickable" id = "BlueButton">
         Blue
       </button>
-
+      <center>
     </div>
   </body>
 
@@ -53,7 +56,7 @@
 
   function loser()
   {
-    firstBox.innerHTML = "Ha. As if clicking some stupid button would give you any luck. You just made a fool of yourself."
+    firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself."
   }
   let greenButtonPageElement = document.getElementById("GreenButton");
   let yellowButtonPageElement = document.getElementById("YellowButton");

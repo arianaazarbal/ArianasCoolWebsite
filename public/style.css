@@ -1,12 +1,12 @@
 h2
 {
-  background-color: pink;
+  background-color: powderblue;
   font-family: cursive;
 }
 
 body
 {
-  background-color: blue;
+  background-color: white;
   background-image: url(landscapeMaine.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,18 +14,19 @@ body
 
 #first
 {
-  border: 15px;
-  padding: 50px 50px;
-  margin-left: auto;
-  margin-right: 500px;
-  border-radius: 25px;
+  border: 20px;
+  border-color: black;
+  padding: 10px 10px;
+  border-radius: 15px;
   background-color: white;
+
 }
 
 .luck
 {
   width: 100px;
   border: 5px;
+  background-color: #66ff00;
   border-radius: 15px;
 
 }
@@ -59,6 +60,10 @@ body
   padding: 40px 40px;
   background-color: #3454C1;
   text-decoration-color: white;
+}
+
+.displayPageElement{
+  margin: auto;
 }
 
 .litGreen
