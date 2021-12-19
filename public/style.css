@@ -103,4 +103,11 @@ button
   background-color: #0909FF;
 }
 
+.unclickable
+{
+  pointer-events: none;
+}
+.hidden {
+  display: none !important;
+}
 )
