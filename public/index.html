@@ -51,48 +51,40 @@
 
   <script>
   let firstBox = document.getElementById ("first");
-  let luck = document.getElementById("lucky")
-  luck.addEventListener ('click', loser)
+  let luck = document.getElementById("lucky");
+  luck.addEventListener ('click', loser);
 
   function loser()
   {
     firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself."
   }
+
   let greenButtonPageElement = document.getElementById("GreenButton");
   let yellowButtonPageElement = document.getElementById("YellowButton");
   let redButtonPageElement = document.getElementById("RedButton");
   let blueButtonPageElement = document.getElementById("BlueButton");
-
+  let displayPageElement = document.getElementById("display");
   let startButtonPageElement = document.getElementById("start");
+
+  
   startButtonPageElement.addEventListener ("click", (event) => {
 
     startGame();
 
 });
 
-  let displayPageElement = document.getElementById("display");
-
-  let level = 0;
+  let level = 1;
   let solutions= [];
   let answer= [];
-  let won = false;
   let flashCount = 0;
   let computerTurn = true;
-  let computerFlashInterval;
+  let computerFlashInterval =0;
 
   function startGame()
   {
     console.log ('game started');
     startButtonPageElement.classList.add('hidden');
     displayPageElement.innerHTML = ("Buttons will now flash...get ready");
-
-    won = false;
-    solutions = [];
-    answer = [];
-    flashCount=0;
-    level = 1;
-    resetColor();
-    computerFlashInterval = 0;
 
     fillSolutions();
 
@@ -328,7 +320,6 @@
 
     function win()
     {
-      won = true;
       displayPageElement.innerHTML= ("You won!!");
       setTimeout(() => {resetGame();
       }, 2000);
@@ -336,6 +327,13 @@
 
     function resetGame()
     {
+      solutions = [];
+      answer = [];
+      flashCount=0;
+      level = 1;
+      resetColor();
+      computerFlashInterval = 0;
+
       displayPageElement.innerHTML = ("Click the start button to begin!");
       startButtonPageElement.classList.remove('hidden');
     }
