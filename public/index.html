@@ -23,7 +23,7 @@
       <br>
       <center>
       <div class = "display" id= "display">
-        Welcome! Click the start button to begin!     
+        Welcome! Click the start button to begin!
       </div>
       <button class = "start" id = "start">
         Start
@@ -76,7 +76,6 @@
   let solutions= [];
   let answer= [];
   let won = false;
-  let correct = true;
   let flashCount = 0;
   let computerTurn = true;
   let computerFlashInterval;
@@ -94,7 +93,6 @@
     level = 1;
     resetColor();
     computerFlashInterval = 0;
-    correct = true;
 
     fillSolutions();
 
@@ -123,14 +121,13 @@
       redButtonPageElement.classList.remove('unclickable');
       blueButtonPageElement.classList.remove('unclickable');
     }
-
-    if (computerTurn== true)
+    else
     {
       resetColor();
       setTimeout(() => {
         lightAColor();
       }, 200);
-  }
+    }
   }
   function lightAColor()
   {
@@ -211,11 +208,11 @@
           setTimeout(() => {
               resetColor();
           }, 300);
-          if (answer.length == 10 && correct == true)
+          if (answer.length == 10)
           {
             win();
           }
-          else if (answer.length == level && correct == true)
+          else if (answer.length == level)
           {
             level++;
             answer = [];
@@ -234,7 +231,6 @@
         answer.push(2);
         if (2 !== solutions[answer.length - 1])
         {
-          correct = false;
           displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
           setTimeout(() => {
               resetGame();
@@ -246,11 +242,11 @@
           setTimeout(() => {
               resetColor();
           }, 300);
-          if (answer.length == 10 && correct == true)
+          if (answer.length == 10)
           {
             win();
           }
-          else if (answer.length == level && correct == true)
+          else if (answer.length == level)
           {
             level++;
             answer = [];
@@ -280,11 +276,11 @@
           setTimeout(() => {
               resetColor();
           }, 300);
-          if (answer.length == 10 && correct == true)
+          if (answer.length == 10)
           {
             win();
           }
-          else if (answer.length == level && correct == true)
+          else if (answer.length == level)
           {
             level++;
             answer = [];
@@ -313,11 +309,11 @@
         {
           lightBlue();
           setTimeout(() => {resetColor();}, 300);
-          if (answer.length == 10 && correct == true)
+          if (answer.length == 10)
           {
             win();
           }
-          else if (answer.length == level && correct == true)
+          else if (answer.length == level)
           {
             level++;
             answer = [];
