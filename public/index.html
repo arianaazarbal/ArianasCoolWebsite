@@ -25,6 +25,9 @@
       <div class = "display" id= "display">
         Welcome! Click the start button to begin!
       </div>
+      <div class = "highScore" id= "highScore">
+        High Score:
+      </div>
       <button class = "start" id = "start">
         Start
       </button>
@@ -50,6 +53,7 @@
   </body>
 
   <script>
+
   let firstBox = document.getElementById ("first");
   let luck = document.getElementById("lucky");
   luck.addEventListener ('click', loser);
@@ -65,8 +69,16 @@
   let blueButtonPageElement = document.getElementById("BlueButton");
   let displayPageElement = document.getElementById("display");
   let startButtonPageElement = document.getElementById("start");
+  let highScorePageElement = document.getElementById ("highScore");
 
-  
+
+  if (window.localStorage.getItem ('highest')== null)
+  {
+    window.localStorage.setItem('highest', 0);
+  }
+  highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+
+
   startButtonPageElement.addEventListener ("click", (event) => {
 
     startGame();
@@ -327,6 +339,11 @@
 
     function resetGame()
     {
+      if (level> window.localStorage.getItem('highest'))
+      {
+        window.localStorage.setItem('highest', level);
+        highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+      }
       solutions = [];
       answer = [];
       flashCount=0;
