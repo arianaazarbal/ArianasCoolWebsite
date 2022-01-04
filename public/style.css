@@ -22,11 +22,6 @@ body
 
 }
 
-.highScore
-{
-  ::after = window.localStorage.getItem (highest);
-}
-
 .luck
 {
   width: 100px;

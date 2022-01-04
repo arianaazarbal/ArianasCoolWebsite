@@ -212,11 +212,7 @@
           setTimeout(() => {
               resetColor();
           }, 300);
-          if (answer.length == 10)
-          {
-            win();
-          }
-          else if (answer.length == level)
+          if (answer.length == level)
           {
             level++;
             answer = [];
@@ -246,11 +242,7 @@
           setTimeout(() => {
               resetColor();
           }, 300);
-          if (answer.length == 10)
-          {
-            win();
-          }
-          else if (answer.length == level)
+          if (answer.length == level)
           {
             level++;
             answer = [];
@@ -280,11 +272,7 @@
           setTimeout(() => {
               resetColor();
           }, 300);
-          if (answer.length == 10)
-          {
-            win();
-          }
-          else if (answer.length == level)
+          if (answer.length == level)
           {
             level++;
             answer = [];
@@ -307,17 +295,13 @@
           displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
           setTimeout(() => {
               resetGame();
-          }, 1500);
+          }, 2000);
         }
         else
         {
           lightBlue();
           setTimeout(() => {resetColor();}, 300);
-          if (answer.length == 10)
-          {
-            win();
-          }
-          else if (answer.length == level)
+          if (answer.length == level)
           {
             level++;
             answer = [];
@@ -330,18 +314,11 @@
       }
     }
 
-    function win()
-    {
-      displayPageElement.innerHTML= ("You won!!");
-      setTimeout(() => {resetGame();
-      }, 2000);
-    }
-
     function resetGame()
     {
       if (level> window.localStorage.getItem('highest'))
       {
-        window.localStorage.setItem('highest', level);
+        window.localStorage.setItem('highest', (level-1));
         highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
       }
       solutions = [];
