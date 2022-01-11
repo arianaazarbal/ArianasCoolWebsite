@@ -53,282 +53,273 @@
 
   <script>
 
-  let firstBox = document.getElementById ("first");
-  let luck = document.getElementById("lucky");
-  luck.addEventListener ('click', loser);
+  let App = {
 
-  function loser()
-  {
-    firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself."
-  }
+    otherObjects : {
+      firstBox : document.getElementById("first"),
+      luck : document.getElementById("lucky"),
+      displayPageElement : document.getElementById("display"),
+      startButtonPageElement : document.getElementById("start"),
+      highScorePageElement : document.getElementById ("highScore")
+    },
 
-  let greenButtonPageElement = document.getElementById("GreenButton");
-  let yellowButtonPageElement = document.getElementById("YellowButton");
-  let redButtonPageElement = document.getElementById("RedButton");
-  let blueButtonPageElement = document.getElementById("BlueButton");
-  let displayPageElement = document.getElementById("display");
-  let startButtonPageElement = document.getElementById("start");
-  let highScorePageElement = document.getElementById ("highScore");
+    variables : {
+      level : 1,
+      solutions : [],
+      answer : [],
+      flashCount : 0,
+      computerTurn : true,
+      computerFlashInterval : 0
+    },
 
+    boxes : {
+      greenButtonPageElement : document.getElementById("GreenButton"),
+      yellowButtonPageElement : document.getElementById("YellowButton"),
+      redButtonPageElement : document.getElementById("RedButton"),
+      blueButtonPageElement : document.getElementById("BlueButton")
+    },
 
-  if (window.localStorage.getItem ('highest')== null)
-  {
-    window.localStorage.setItem('highest', 0);
-  }
-  highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+    helperFunctions {
+      pauseButtonClickabilityAndFlash : function() {
+        App.variables.computerTurn = true;
+        App.boxes.greenButtonPageElement.classList.add('unclickable');
+        App.boxes.yellowButtonPageElement.classList.add('unclickable');
+        App.boxes.redButtonPageElement.classList.add('unclickable');
+        App.boxes.blueButtonPageElement.classList.add('unclickable');
 
-  startButtonPageElement.addEventListener ("click", (event) => {
-
-    startGame();
-
-});
-
-  let level = 1;
-  let solutions= [];
-  let answer= [];
-  let flashCount = 0;
-  let computerTurn = true;
-  let computerFlashInterval =0;
-
-  function startGame()
-  {
-    console.log ('game started');
-    startButtonPageElement.classList.add('hidden');
-    displayPageElement.innerHTML = ("Buttons will now flash...get ready");
-
-    fillSolutions();
-
-    computerFlashInterval = setInterval(computerPlay, 1000);
-
-  }
-
-  function computerPlay()
-  {
-    console.log ('computerPlay() entered');
-
-    computerTurn = true;
-
-    greenButtonPageElement.classList.add('unclickable');
-    yellowButtonPageElement.classList.add('unclickable');
-    redButtonPageElement.classList.add('unclickable');
-    blueButtonPageElement.classList.add('unclickable');
-
-    if (level == flashCount)
-    {
-      clearInterval(computerFlashInterval);
-      resetColor();
-      computerTurn = false;
-      greenButtonPageElement.classList.remove('unclickable');
-      yellowButtonPageElement.classList.remove('unclickable');
-      redButtonPageElement.classList.remove('unclickable');
-      blueButtonPageElement.classList.remove('unclickable');
-    }
-    else
-    {
-      resetColor();
-      setTimeout(() => {
-        lightAColor();
-      }, 200);
-    }
-  }
-  function lightAColor()
-  {
-    console.log ('lightAColor() entered');
-    if (solutions[flashCount] == 1)
-    {
-      lightGreen();
-    }
-    else if (solutions[flashCount] == 2)
-    {
-      lightYellow();
-    }
-    else if (solutions[flashCount] == 3)
-    {
-      lightRed();
-    }
-    else
-    {
-      lightBlue();
-    }
-    flashCount++;
-  }
-  function resetColor()
-  {
-    greenButtonPageElement.classList.remove('litGreen');
-    yellowButtonPageElement.classList.remove('litYellow');
-    redButtonPageElement.classList.remove('litRed');
-    blueButtonPageElement.classList.remove('litBlue');
-  }
-
-  function fillSolutions()
-  {
-    console.log ('fillSolutions() entered');
-    for (var i = 0; i<10; i++)
-    {
-      solutions.push (Math.floor(Math.random() *4 + 1));
-    }
-    console.log (solutions);
-  }
-
-  function lightGreen()
-  {
-      greenButtonPageElement.classList.add('litGreen');
-      console.log ('new green light up');
-  }
-  function lightYellow()
-  {
-      yellowButtonPageElement.classList.add('litYellow');
-      console.log ('new yellow light up');
-  }
-  function lightRed()
-  {
-      redButtonPageElement.classList.add('litRed');
-      console.log ('new red light up');
-  }
-  function lightBlue()
-  {
-      blueButtonPageElement.classList.add('litBlue');
-      console.log ('new blue light up');
-  }
-
-  greenButtonPageElement.addEventListener('click', greenClick);
-  function greenClick()
-  {
-    if (computerTurn == false)
-    {
-        answer.push(1);
-        if (1 !== solutions[answer.length - 1])
+        if (App.variables.level == App.variables.flashCount)
         {
-          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-          setTimeout(() => {
-              resetGame();
-          }, 1500);
+          clearInterval(computerFlashInterval);
+          resetColor();
+          App.variables.computerTurn = false;
+          App.boxes.greenButtonPageElement.classList.remove('unclickable');
+          App.boxes.yellowButtonPageElement.classList.remove('unclickable');
+          App.boxes.redButtonPageElement.classList.remove('unclickable');
+          App.boxes.blueButtonPageElement.classList.remove('unclickable');
         }
         else
+        {
+          resetColor();
+          setTimeout(() => {
+            lightAColor();
+          }, 200);
+        }
+      },
+
+      makeFunOfUser : function() {
+        firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself.";
+      },
+
+      setHighScore : function() {
+        if(window.localStorage.getItem ('highest')== null)
+        {
+          window.localStorage.setItem('highest', 0);
+        }
+        highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+      },
+
+      lightAColor : function() {
+        console.log ('lightAColor() entered');
+        if (App.variables.solutions[App.variables.flashCount] == 1)
         {
           lightGreen();
-          setTimeout(() => {
-              resetColor();
-          }, 300);
-          if (answer.length == level)
-          {
-            level++;
-            answer = [];
-            comuterTurn = true;
-            flashCount = 0;
-            computerFlashInterval = setInterval(computerPlay, 1000);
-          }
         }
-      }
-  }
-
-  yellowButtonPageElement.addEventListener('click', yellowClick);
-  function yellowClick()
-  {
-    if (computerTurn == false) {
-        answer.push(2);
-        if (2 !== solutions[answer.length - 1])
-        {
-          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-          setTimeout(() => {
-              resetGame();
-          }, 1500);
-        }
-        else
+        else if (App.variables.solutions[App.variables.flashCount] == 2)
         {
           lightYellow();
-          setTimeout(() => {
-              resetColor();
-          }, 300);
-          if (answer.length == level)
-          {
-            level++;
-            answer = [];
-            comuterTurn = true;
-            flashCount = 0;
-            computerFlashInterval = setInterval(computerPlay, 1000);
-          }
         }
-      }
-  }
-
-  redButtonPageElement.addEventListener('click', redClick);
-  function redClick()
-  {
-    if (computerTurn == false) {
-        answer.push(3);
-        if (3 !== solutions[answer.length - 1])
-        {
-          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-          setTimeout(() => {
-              resetGame();
-          }, 1500);
-        }
-        else
+        else if (App.variables.solutions[App.variables.flashCount] == 3)
         {
           lightRed();
-          setTimeout(() => {
-              resetColor();
-          }, 300);
-          if (answer.length == level)
-          {
-            level++;
-            answer = [];
-            comuterTurn = true;
-            flashCount = 0;
-            computerFlashInterval = setInterval(computerPlay, 1000);
-          }
-        }
-      }
-  }
-
-  blueButtonPageElement.addEventListener('click', blueClick);
-  function blueClick()
-  {
-    if (computerTurn == false)
-    {
-        answer.push(4);
-        if (4 !== solutions[answer.length - 1])
-        {
-          displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-          setTimeout(() => {
-              resetGame();
-          }, 2000);
         }
         else
         {
           lightBlue();
-          setTimeout(() => {resetColor();}, 300);
-          if (answer.length == level)
-          {
-            level++;
-            answer = [];
-            comuterTurn = true;
-            flashCount = 0;
-            computerFlashInterval = setInterval(computerPlay, 1000);
-          }
         }
+        App.variables.flashCount++;
+      },
 
+      resetColor : function() {
+        App.boxes.greenButtonPageElement.classList.remove('litGreen');
+        App.boxes.yellowButtonPageElement.classList.remove('litYellow');
+        App.boxes.redButtonPageElement.classList.remove('litRed');
+        App.boxes.blueButtonPageElement.classList.remove('litBlue');
+      },
+
+      fillSolutions : function() {
+        console.log ('fillSolutions() entered');
+        for (var i = 0; i < 10; i++)
+        {
+          App.variables.solutions.push(Math.floor(Math.random()*4 + 1));
+        }
+        console.log(App.variables.solutions);
+      },
+
+      lightFunx : {
+        lightGreen : function() {
+          App.boxes.greenButtonPageElement.classList.add('litGreen');
+        },
+        lightYellow : function() {
+          App.boxes.yellowButtonPageElement.classList.add('litYellow');
+        },
+        lightRed : function() {
+          App.boxes.redButtonPageElement.classList.add('litRed');
+        },
+        lightBlue : function() {
+          App.boxes.blueButtonPageElement.classList.add('litBlue');
+        }
+      },
+
+      clickFunx : {
+        greenClick : function() {
+          if (App.variables.computerTurn == false)
+          {
+              App.variables.answer.push(1);
+              if (1 !== App.variables.solutions[App.variables.answer.length - 1])
+              {
+                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+                setTimeout(() => {
+                    App.helperFunctions.resetGame();
+                }, 1500);
+              }
+              else
+              {
+                App.helperFunctions.lightFunx.lightGreen();
+                setTimeout(() => {
+                    resetColor();
+                }, 300);
+                if (App.helperFunctions.answer.length == App.variables.level)
+                {
+                  App.variables.level++;
+                  App.variables.answer = [];
+                  App.variables.comuterTurn = true;
+                  App.variables.flashCount = 0;
+                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
+                }
+              }
+            }
+        },
+        yellowClick : function() {
+          if (App.variables.computerTurn == false)
+          {
+              App.variables.answer.push(2);
+              if (2 !== App.variables.solutions[App.variables.answer.length - 1])
+              {
+                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+                setTimeout(() => {
+                    App.helperFunctions.resetGame();
+                }, 1500);
+              }
+              else
+              {
+                App.helperFunctions.lightFunx.lightYellow();
+                setTimeout(() => {
+                    resetColor();
+                }, 300);
+                if (App.helperFunctions.answer.length == App.variables.level)
+                {
+                  App.variables.level++;
+                  App.variables.answer = [];
+                  App.variables.comuterTurn = true;
+                  App.variables.flashCount = 0;
+                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
+                }
+              }
+            }
+        },
+        redClick : function() {
+          if (App.variables.computerTurn == false)
+          {
+              App.variables.answer.push(3);
+              if (3 !== App.variables.solutions[App.variables.answer.length - 1])
+              {
+                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+                setTimeout(() => {
+                    App.helperFunctions.resetGame();
+                }, 1500);
+              }
+              else
+              {
+                App.helperFunctions.lightFunx.lightRed();
+                setTimeout(() => {
+                    resetColor();
+                }, 300);
+                if (App.helperFunctions.answer.length == App.variables.level)
+                {
+                  App.variables.level++;
+                  App.variables.answer = [];
+                  App.variables.comuterTurn = true;
+                  App.variables.flashCount = 0;
+                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
+                }
+              }
+            }
+        },
+        blueClick : function() {
+          if (App.variables.computerTurn == false)
+          {
+              App.variables.answer.push(4);
+              if (4 !== App.variables.solutions[App.variables.answer.length - 1])
+              {
+                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
+                setTimeout(() => {
+                    App.helperFunctions.resetGame();
+                }, 1500);
+              }
+              else
+              {
+                App.helperFunctions.lightFunx.lightBlue();
+                setTimeout(() => {
+                    resetColor();
+                }, 300);
+                if (App.helperFunctions.answer.length == App.variables.level)
+                {
+                  App.variables.level++;
+                  App.variables.answer = [];
+                  App.variables.comuterTurn = true;
+                  App.variables.flashCount = 0;
+                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
+                }
+              }
+            }
+        }
+      },
+
+      resetGame : function() {
+        if (App.variables.level> window.localStorage.getItem('highest'))
+        {
+          window.localStorage.setItem('highest', (level-1));
+          App.otherObjects.highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+        }
+        App.variables.solutions = [];
+        App.variables.answer = [];
+        App.variables.flashCount=0;
+        App.variables.level = 1;
+        App.helperFunctions.resetColor();
+        App.variables.computerFlashInterval = 0;
+
+        App.otherObjects.displayPageElement.innerHTML = ("Click the start button to begin!");
+        App.otherObjects.startButtonPageElement.classList.remove('hidden');
       }
-    }
+    },
 
-    function resetGame()
-    {
-      if (level> window.localStorage.getItem('highest'))
-      {
-        window.localStorage.setItem('highest', (level-1));
-        highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
-      }
-      solutions = [];
-      answer = [];
-      flashCount=0;
-      level = 1;
-      resetColor();
-      computerFlashInterval = 0;
+    startGame : function() {
+      console.log ('game started');
+      App.otherObjects.startButtonPageElement.classList.add('hidden');
+      App.otherObjects.displayPageElement.innerHTML = ("Buttons will now flash...get ready");
 
-      displayPageElement.innerHTML = ("Click the start button to begin!");
-      startButtonPageElement.classList.remove('hidden');
+      App.helperFunctions.fillSolutions();
+
+      App.variables.computerFlashInterval = setInterval(computerPlay, 1000);
     }
+  };
+
+  App.otherObjects.luck.addEventListener ('click', App.helperFunctions.makeFunOfUser;
+  App.otherObjects.startButtonPageElement.addEventListener("click", (event) => { App.startGame(); });
+  App.boxes.greenButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.greenClick;
+  App.boxes.yellowButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.yellowClick;
+  App.boxes.redButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.redClick;
+  App.boxes.blueButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.blueClick;
 
   </script>
 
