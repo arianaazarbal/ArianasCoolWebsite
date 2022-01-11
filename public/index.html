@@ -1,299 +1,265 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title> Ariana's Web Page </title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel = "javasheet" href = "" type =
-  </head>
 
-  <body>
-    <h2> <center> Welcome to Ariana's Web Page </center> </h2>
+<head>
+  <title> Ariana's Web Page </title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="javasheet" href="" type=</head>
 
-    <div align = "left" id = "first">
-      We're playing Simon!
-      <button class = "luck" id = "lucky" type= "button">
-          Click for good luck :)
-      </button>
-     </div>
+<body>
+  <h2>
+    <center> Welcome to Ariana's Web Page </center>
+  </h2>
 
+  <div align="left" id="first">
+    We're playing Simon!
+    <button class="luck" id="lucky" type="button">
+      Click for good luck :)
+    </button>
+  </div>
+
+  <br>
+  <br>
+  <div class="simon">
     <br>
     <br>
-    <div class = "simon">
-      <br>
-      <br>
-      <center>
-      <div class = "display" id= "display">
+    <center>
+      <div class="display" id="display">
         Welcome! Click the start button to begin!
       </div>
-      <div class = "highScore" id= "highScore">
+      <div class="highScore" id="highScore">
       </div>
-      <button class = "start" id = "start">
+      <button class="start" id="start">
         Start
       </button>
-      </center>
+    </center>
 
 
-      <br>
-      <center>
-      <button class = "green unclickable" id = "GreenButton">
-          Green
+    <br>
+    <center>
+      <button class="green unclickable" id="GreenButton">
+        Green
       </button>
-      <button class = "yellow unclickable" id = "YellowButton">
+      <button class="yellow unclickable" id="YellowButton">
         Yellow
       </button>
-      <button class = "red unclickable" id = "RedButton">
+      <button class="red unclickable" id="RedButton">
         Red
       </button>
-      <button class = "blue unclickable" id = "BlueButton">
+      <button class="blue unclickable" id="BlueButton">
         Blue
       </button>
       <center>
-    </div>
-  </body>
+  </div>
+</body>
 
-  <script>
-
+<script>
   let App = {
 
-    otherObjects : {
-      firstBox : document.getElementById("first"),
-      luck : document.getElementById("lucky"),
-      displayPageElement : document.getElementById("display"),
-      startButtonPageElement : document.getElementById("start"),
-      highScorePageElement : document.getElementById ("highScore")
+    otherObjects: {
+      firstBox: document.getElementById("first"),
+      luck: document.getElementById("lucky"),
+      displayPageElement: document.getElementById("display"),
+      startButtonPageElement: document.getElementById("start"),
+      highScorePageElement: document.getElementById("highScore")
     },
 
-    variables : {
-      level : 1,
-      solutions : [],
-      answer : [],
-      flashCount : 0,
-      computerTurn : true,
-      computerFlashInterval : 0
+    variables: {
+      level: 1,
+      solutions: [],
+      answer: [],
+      flashCount: 0,
+      computerTurn: true,
+      computerFlashInterval: 0
     },
 
-    boxes : {
-      greenButtonPageElement : document.getElementById("GreenButton"),
-      yellowButtonPageElement : document.getElementById("YellowButton"),
-      redButtonPageElement : document.getElementById("RedButton"),
-      blueButtonPageElement : document.getElementById("BlueButton")
+    boxes: {
+      greenButtonPageElement: document.getElementById("GreenButton"),
+      yellowButtonPageElement: document.getElementById("YellowButton"),
+      redButtonPageElement: document.getElementById("RedButton"),
+      blueButtonPageElement: document.getElementById("BlueButton")
     },
 
-    helperFunctions {
-      pauseButtonClickabilityAndFlash : function() {
+    helperFunctions : {
+      pauseButtonClickabilityAndFlash: function() {
         App.variables.computerTurn = true;
         App.boxes.greenButtonPageElement.classList.add('unclickable');
         App.boxes.yellowButtonPageElement.classList.add('unclickable');
         App.boxes.redButtonPageElement.classList.add('unclickable');
         App.boxes.blueButtonPageElement.classList.add('unclickable');
 
-        if (App.variables.level == App.variables.flashCount)
-        {
+        if (App.variables.level == App.variables.flashCount) {
           clearInterval(App.variables.computerFlashInterval);
-          resetColor();
+          App.helperFunctions.resetColor();
           App.variables.computerTurn = false;
           App.boxes.greenButtonPageElement.classList.remove('unclickable');
           App.boxes.yellowButtonPageElement.classList.remove('unclickable');
           App.boxes.redButtonPageElement.classList.remove('unclickable');
           App.boxes.blueButtonPageElement.classList.remove('unclickable');
-        }
-        else
-        {
-          resetColor();
+        } else {
+          App.helperFunctions.resetColor();
           setTimeout(() => {
-            lightAColor();
+            App.helperFunctions.lightAColor();
           }, 200);
         }
       },
 
-      makeFunOfUser : function() {
+      makeFunOfUser: function() {
         App.otherObjects.firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself.";
       },
 
-      setHighScore : function() {
-        if(window.localStorage.getItem ('highest')== null)
-        {
-          window.localStorage.setItem('highest', 0);
-        }
-        App.otherObjects.highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+      setHighScore: function() {
+        if (window.localStorage.getItem('highest') == null) { window.localStorage.setItem('highest', 0); }
+        App.otherObjects.highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem('highest');
       },
 
-      lightAColor : function() {
-        console.log ('lightAColor() entered');
-        if (App.variables.solutions[App.variables.flashCount] == 1)
-        {
+      lightAColor: function() {
+        console.log('lightAColor() entered');
+        if (App.variables.solutions[App.variables.flashCount] == 1) {
           App.helperFunctions.lightFunx.lightGreen();
-        }
-        else if (App.variables.solutions[App.variables.flashCount] == 2)
-        {
+        } else if (App.variables.solutions[App.variables.flashCount] == 2) {
           App.helperFunctions.lightFunx.lightYellow();
-        }
-        else if (App.variables.solutions[App.variables.flashCount] == 3)
-        {
+        } else if (App.variables.solutions[App.variables.flashCount] == 3) {
           App.helperFunctions.lightFunx.lightRed();
-        }
-        else
-        {
+        } else {
           App.helperFunctions.lightFunx.lightBlue();
         }
         App.variables.flashCount++;
       },
 
-      resetColor : function() {
+      resetColor: function() {
         App.boxes.greenButtonPageElement.classList.remove('litGreen');
         App.boxes.yellowButtonPageElement.classList.remove('litYellow');
         App.boxes.redButtonPageElement.classList.remove('litRed');
         App.boxes.blueButtonPageElement.classList.remove('litBlue');
       },
 
-      fillSolutions : function() {
-        console.log ('fillSolutions() entered');
-        for (var i = 0; i < 10; i++)
-        {
-          App.variables.solutions.push(Math.floor(Math.random()*4 + 1));
+      fillSolutions: function() {
+        console.log('fillSolutions() entered');
+        for (var i = 0; i < 10; i++) {
+          App.variables.solutions.push(Math.floor(Math.random() * 4 + 1));
         }
         console.log(App.variables.solutions);
       },
 
-      lightFunx : {
-        lightGreen : function() {
+      lightFunx: {
+        lightGreen: function() {
           App.boxes.greenButtonPageElement.classList.add('litGreen');
         },
-        lightYellow : function() {
+        lightYellow: function() {
           App.boxes.yellowButtonPageElement.classList.add('litYellow');
         },
-        lightRed : function() {
+        lightRed: function() {
           App.boxes.redButtonPageElement.classList.add('litRed');
         },
-        lightBlue : function() {
+        lightBlue: function() {
           App.boxes.blueButtonPageElement.classList.add('litBlue');
         }
       },
 
-      clickFunx : {
-        greenClick : function() {
-          if (App.variables.computerTurn == false)
-          {
-              App.variables.answer.push(1);
-              if (1 !== App.variables.solutions[App.variables.answer.length - 1])
-              {
-                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-                setTimeout(() => {
-                    App.helperFunctions.resetGame();
-                }, 1500);
-              }
-              else
-              {
-                App.helperFunctions.lightFunx.lightGreen();
-                setTimeout(() => {
-                    resetColor();
-                }, 300);
-                if (App.helperFunctions.answer.length == App.variables.level)
-                {
-                  App.variables.level++;
-                  App.variables.answer = [];
-                  App.variables.comuterTurn = true;
-                  App.variables.flashCount = 0;
-                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
-                }
+      clickFunx: {
+        greenClick: function() {
+          if (App.variables.computerTurn == false) {
+            App.variables.answer.push(1);
+            if (1 !== App.variables.solutions[App.variables.answer.length - 1]) {
+              App.otherObjects.displayPageElement.innerHTML = ("No, that was wrong unfortunately.")
+              setTimeout(() => {
+                App.helperFunctions.resetGame();
+              }, 1500);
+            } else {
+              App.helperFunctions.lightFunx.lightGreen();
+              setTimeout(() => {
+                App.helperFunctions.resetColor();
+              }, 300);
+              if (App.variables.answer.length == App.variables.level) {
+                App.variables.level++;
+                App.variables.answer = [];
+                App.variables.comuterTurn = true;
+                App.variables.flashCount = 0;
+                App.variables.computerFlashInterval = setInterval(App.helperFunctions.pauseButtonClickabilityAndFlash, 1000);
               }
             }
+          }
         },
-        yellowClick : function() {
-          if (App.variables.computerTurn == false)
-          {
-              App.variables.answer.push(2);
-              if (2 !== App.variables.solutions[App.variables.answer.length - 1])
-              {
-                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-                setTimeout(() => {
-                    App.helperFunctions.resetGame();
-                }, 1500);
-              }
-              else
-              {
-                App.helperFunctions.lightFunx.lightYellow();
-                setTimeout(() => {
-                    resetColor();
-                }, 300);
-                if (App.helperFunctions.answer.length == App.variables.level)
-                {
-                  App.variables.level++;
-                  App.variables.answer = [];
-                  App.variables.comuterTurn = true;
-                  App.variables.flashCount = 0;
-                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
-                }
+        yellowClick: function() {
+          if (App.variables.computerTurn == false) {
+            App.variables.answer.push(2);
+            if (2 !== App.variables.solutions[App.variables.answer.length - 1]) {
+              App.otherObjects.displayPageElement.innerHTML = ("No, that was wrong unfortunately.")
+              setTimeout(() => {
+                App.helperFunctions.resetGame();
+              }, 1500);
+            } else {
+              App.helperFunctions.lightFunx.lightYellow();
+              setTimeout(() => {
+                App.helperFunctions.resetColor();
+              }, 300);
+              if (App.variables.answer.length == App.variables.level) {
+                App.variables.level++;
+                App.variables.answer = [];
+                App.variables.comuterTurn = true;
+                App.variables.flashCount = 0;
+                App.variables.computerFlashInterval = setInterval(App.helperFunctions.pauseButtonClickabilityAndFlash, 1000);
               }
             }
+          }
         },
-        redClick : function() {
-          if (App.variables.computerTurn == false)
-          {
-              App.variables.answer.push(3);
-              if (3 !== App.variables.solutions[App.variables.answer.length - 1])
-              {
-                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-                setTimeout(() => {
-                    App.helperFunctions.resetGame();
-                }, 1500);
-              }
-              else
-              {
-                App.helperFunctions.lightFunx.lightRed();
-                setTimeout(() => {
-                    resetColor();
-                }, 300);
-                if (App.helperFunctions.answer.length == App.variables.level)
-                {
-                  App.variables.level++;
-                  App.variables.answer = [];
-                  App.variables.comuterTurn = true;
-                  App.variables.flashCount = 0;
-                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
-                }
+        redClick: function() {
+          if (App.variables.computerTurn == false) {
+            App.variables.answer.push(3);
+            if (3 !== App.variables.solutions[App.variables.answer.length - 1]) {
+              App.otherObjects.displayPageElement.innerHTML = ("No, that was wrong unfortunately.")
+              setTimeout(() => {
+                App.helperFunctions.resetGame();
+              }, 1500);
+            } else {
+              App.helperFunctions.lightFunx.lightRed();
+              setTimeout(() => {
+                App.helperFunctions.resetColor();
+              }, 300);
+              if (App.variables.answer.length == App.variables.level) {
+                App.variables.level++;
+                App.variables.answer = [];
+                App.variables.comuterTurn = true;
+                App.variables.flashCount = 0;
+                App.variables.computerFlashInterval = setInterval(App.helperFunctions.pauseButtonClickabilityAndFlash, 1000);
               }
             }
+          }
         },
-        blueClick : function() {
-          if (App.variables.computerTurn == false)
-          {
-              App.variables.answer.push(4);
-              if (4 !== App.variables.solutions[App.variables.answer.length - 1])
-              {
-                App.otherObjects.displayPageElement.innerHTML= ("No, that was wrong unfortunately.")
-                setTimeout(() => {
-                    App.helperFunctions.resetGame();
-                }, 1500);
-              }
-              else
-              {
-                App.helperFunctions.lightFunx.lightBlue();
-                setTimeout(() => {
-                    resetColor();
-                }, 300);
-                if (App.helperFunctions.answer.length == App.variables.level)
-                {
-                  App.variables.level++;
-                  App.variables.answer = [];
-                  App.variables.comuterTurn = true;
-                  App.variables.flashCount = 0;
-                  App.variables.computerFlashInterval = setInterval(App.variables.computerPlay, 1000);
-                }
+        blueClick: function() {
+          if (App.variables.computerTurn == false) {
+            App.variables.answer.push(4);
+            if (4 !== App.variables.solutions[App.variables.answer.length - 1]) {
+              App.otherObjects.displayPageElement.innerHTML = ("No, that was wrong unfortunately.")
+              setTimeout(() => {
+                App.helperFunctions.resetGame();
+              }, 1500);
+            } else {
+              App.helperFunctions.lightFunx.lightBlue();
+              setTimeout(() => {
+                App.helperFunctions.resetColor();
+              }, 300);
+              if (App.variables.answer.length == App.variables.level) {
+                App.variables.level++;
+                App.variables.answer = [];
+                App.variables.comuterTurn = true;
+                App.variables.flashCount = 0;
+                App.variables.computerFlashInterval = setInterval(App.helperFunctions.pauseButtonClickabilityAndFlash, 1000);
               }
             }
+          }
         }
       },
 
-      resetGame : function() {
-        if (App.variables.level> window.localStorage.getItem('highest'))
-        {
-          window.localStorage.setItem('highest', (level-1));
-          App.otherObjects.highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+      resetGame: function() {
+        if (App.variables.level > window.localStorage.getItem('highest')) {
+          window.localStorage.setItem('highest', (App.variables.level - 1));
+          App.otherObjects.highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem('highest');
         }
         App.variables.solutions = [];
         App.variables.answer = [];
-        App.variables.flashCount=0;
+        App.variables.flashCount = 0;
         App.variables.level = 1;
         App.helperFunctions.resetColor();
         App.variables.computerFlashInterval = 0;
@@ -303,24 +269,23 @@
       }
     },
 
-    startGame : function() {
-      console.log ('game started');
+    startGame: function() {
+      console.log('game started');
       App.otherObjects.startButtonPageElement.classList.add('hidden');
       App.otherObjects.displayPageElement.innerHTML = ("Buttons will now flash...get ready");
 
       App.helperFunctions.fillSolutions();
 
-      App.variables.computerFlashInterval = setInterval(computerPlay, 1000);
+      App.variables.computerFlashInterval = setInterval(App.helperFunctions.pauseButtonClickabilityAndFlash, 1000);
     }
   };
 
-  App.otherObjects.luck.addEventListener ('click', App.helperFunctions.makeFunOfUser;
+  App.otherObjects.luck.addEventListener('click', App.helperFunctions.makeFunOfUser);
   App.otherObjects.startButtonPageElement.addEventListener("click", (event) => { App.startGame(); });
-  App.boxes.greenButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.greenClick;
-  App.boxes.yellowButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.yellowClick;
-  App.boxes.redButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.redClick;
-  App.boxes.blueButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.blueClick;
-
-  </script>
+  App.boxes.greenButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.greenClick);
+  App.boxes.yellowButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.yellowClick);
+  App.boxes.redButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.redClick);
+  App.boxes.blueButtonPageElement.addEventListener('click', App.helperFunctions.clickFunx.blueClick);
+</script>
 
 </html>
