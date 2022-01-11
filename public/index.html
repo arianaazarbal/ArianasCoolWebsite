@@ -89,7 +89,7 @@
 
         if (App.variables.level == App.variables.flashCount)
         {
-          clearInterval(computerFlashInterval);
+          clearInterval(App.variables.computerFlashInterval);
           resetColor();
           App.variables.computerTurn = false;
           App.boxes.greenButtonPageElement.classList.remove('unclickable');
@@ -107,7 +107,7 @@
       },
 
       makeFunOfUser : function() {
-        firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself.";
+        App.otherObjects.firstBox.innerHTML = "Ha. As if. Simon is a test of intellectual prowess, not luck. You just made a fool of yourself.";
       },
 
       setHighScore : function() {
@@ -115,26 +115,26 @@
         {
           window.localStorage.setItem('highest', 0);
         }
-        highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
+        App.otherObjects.highScorePageElement.innerHTML = "High Score: " + window.localStorage.getItem ('highest');
       },
 
       lightAColor : function() {
         console.log ('lightAColor() entered');
         if (App.variables.solutions[App.variables.flashCount] == 1)
         {
-          lightGreen();
+          App.helperFunctions.lightFunx.lightGreen();
         }
         else if (App.variables.solutions[App.variables.flashCount] == 2)
         {
-          lightYellow();
+          App.helperFunctions.lightFunx.lightYellow();
         }
         else if (App.variables.solutions[App.variables.flashCount] == 3)
         {
-          lightRed();
+          App.helperFunctions.lightFunx.lightRed();
         }
         else
         {
-          lightBlue();
+          App.helperFunctions.lightFunx.lightBlue();
         }
         App.variables.flashCount++;
       },
